@@ -4,7 +4,7 @@ const router = express.Router();
 const postsService = require('../services/posts.service');
 const AppError = require('../middleware/appError');
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res,) => {
     try {
         const posts = await postsService.getAllPosts();
         res.json(posts);
