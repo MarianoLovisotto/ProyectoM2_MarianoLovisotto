@@ -1,12 +1,12 @@
 {
   "name": "pi",
   "version": "1.0.0",
-  "description": "",
   "main": "src/server.js",
   "scripts": {
-    "test": "jest --detectOpenHandles --forceExit",
+    "test": "cross-env NODE_ENV=test jest --detectOpenHandles --forceExit",
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "setup-db": "node scripts/setup-db.js"
   },
   "jest": {
     "setupFiles": [
@@ -18,11 +18,15 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "pg": "^8.23.0"
+    "pg": "^8.23.0",
+    "swagger-ui-express": "^5.0.1",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "cross-env": "^10.1.0",
     "jest": "^30.4.2",
     "nodemon": "^3.1.14",
     "supertest": "^7.2.2"
-  }
+  },
+  "dependcies": {}
 }
