@@ -152,13 +152,6 @@ y cargará datos iniciales de prueba.
 npm run dev
 ```
 
-La API estará disponible en:
-
-```text
-http://localhost:3000
-```
-
----
 
 # 📡 Endpoints principales
 
@@ -294,6 +287,10 @@ El deployment requiere:
 2. Servicio de aplicación Node.js en Railway.
 3. Base de datos PostgreSQL.
 4. Variables de entorno configuradas en Railway.
+
+**API:** https://proyectom2marianolovisotto-production.up.railway.app
+
+**Swagger:**  👉 https://proyectom2marianolovisotto-production.up.railway.app/docs/
 
 ## Variables de entorno
 
