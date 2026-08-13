@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
     res.json(authors);
     } catch (error) {
     next(error);
-    }
+    };
 });
 
 // GET /authors/:id
