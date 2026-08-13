@@ -10,10 +10,9 @@ app.get('/', (req, res) => {
 
 module.exports = app;
 
-const authorsService = require('./services/authors.service')
+const authorsService = require('./services/authors.service');
+const authorsRoutes = require('./routes/authors.routes');
+app.use('/authors', authorsRoutes);
 
-app.get('/test-authors', async (req, res) => {
-    const authors = await authorsService.getAllAuthors();
-    res.json(authors);
-})
-
+const postsRoutes = requiere('./routes/posts.routes');
+app.use('/posts' , postsRoutes);
