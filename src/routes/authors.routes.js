@@ -2,38 +2,54 @@ const express = require('express');
 const router = express.Router();
 
 const authorsService = require('../services/authors.service');
+const AppError = require('../middleware/appError');
 
-router.get('/', async(req, res) =>{
-    const authors = await authorsService.getAllAuthors();
-    res.json(authors);
-});
-
-router.get('/:id', async (req, res) => {
-    const { id } = req.params;
-
-    const author = await authorsService.getAuthorById(id);
-
-    if(!author) {
-        return res.status(404).json({message: 'Autor no encontrando'});
+router.get('/', async(req, res, next) => {
+    try {
+        const authors = await authorsService.getAllAuthors();
+        res.json(authors);
+    }catch(error) {
+        next(error);
     }
-
-    res.json(author);
 });
 
-router.post('/', async (req, res) => {
-    const {name, email, bio} = req.body;
 
-    if(!name || !email) {
-        return res.status(400).json({message: 'Name e email son obligatorios'});
+router.get('/:id', async (req, res, next) => {
+    try{
+        const author = await authorsService.getAuthorsById(req.params.id);
+
+        if(!author) {
+            throw new AppError('Author no encontrado', 404);
+        }
+        res.json(author);
+    }catch(error) {
+        next(error);
     }
-
-    const newAuthor = await authorsService.createAuthor({
-        name,
-        email,
-        bio,
-    });
-
-    res.status(201).json(newAuthor);
 });
+
+
+router.post('/', async( res, req, next) => {
+    try{
+        const {name, email, bio} = req.body;
+
+        if(!name || !email) {
+            throw new AppError('Name y email son obligatorios', 400);
+        }
+
+        const newAuthor = await authorsService.createAuthor({
+            name, 
+            email,
+            bio,
+        });
+
+        res.status(201).json(newAuthor);
+    } catch(error) {
+        if(error.code === '23505') {
+            return next(new AppError('El email ya existe', 400))
+        }
+        next(error);
+    }
+});
+
 
 module.exports = router

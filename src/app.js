@@ -16,3 +16,6 @@ app.use('/authors', authorsRoutes);
 
 const postsRoutes = requiere('./routes/posts.routes');
 app.use('/posts' , postsRoutes);
+
+const errorHandler = require('./middleware/errorHandler');
+app.use(errorHandler);
