@@ -6,7 +6,7 @@ info:
   description: API REST para gestión de authors y posts
 
 servers:
-  - url: http://localhost:3000
+  - url: https://proyectom2marianolovisotto-production.up.railway.app
 
 tags:
   - name: Authors
